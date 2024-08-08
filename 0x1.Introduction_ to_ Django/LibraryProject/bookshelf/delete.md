@@ -2,5 +2,10 @@
 
 **Command:**
 ```python
-book = Book.objects.get(title="Nineteen Eighty-Four")
-book.delete()
+from bookshelf.models import Book
+
+# Retrieve all books with the title "1984"
+books = Book.objects.filter(title="1984")
+
+# Delete all books with the title "1984"
+books.delete()
