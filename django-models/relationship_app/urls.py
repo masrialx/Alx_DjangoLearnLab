@@ -7,5 +7,5 @@ urlpatterns = [
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('register/', views.user_register, name='register'),
+    path('register/', views.user_register, name='register'),  # Ensure this line is present
 ]
