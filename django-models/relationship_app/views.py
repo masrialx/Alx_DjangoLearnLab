@@ -1,3 +1,5 @@
+# relationship_app/views.py
+
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from relationship_app.models import Book, Library
