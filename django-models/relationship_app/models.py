@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -55,6 +57,18 @@ class UserProfile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
+
+
+# relationship_app/models.py
+
+
+
+class CustomUser(AbstractUser):
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+    def __str__(self):
+        return self.username
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
