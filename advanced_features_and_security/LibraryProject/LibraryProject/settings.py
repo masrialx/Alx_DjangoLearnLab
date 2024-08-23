@@ -133,3 +133,6 @@ SECURE_BROWSER_XSS_FILTER = True
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
 CSP_SCRIPT_SRC = ("'self'", 'https://code.jquery.com')
+
+# Configure Django to handle SSL headers from a reverse proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
