@@ -8,6 +8,29 @@ nums = [10,4,8,3]
 print(Tx(nums))
 
 
+class Solution:
+    def longestNiceSubstring(self, s):
+        def is_nice(sub):
+            chr = set(sub)
+            return all(c.lower() in chr and c.upper() in chr for c in chr)
+
+        long = ""
+        n = len(s)
+
+        for i in range(n):
+            for j in range(i + 1, n + 1):
+                substring = s[i:j]
+                if is_nice(substring) and len(substring) > len(long):
+                    long = substring
+
+        return long
+
+
+rs = Solution()
+print(rs.longestNiceSubstring("YazaAay"))  
+
+
+
 
 
 
