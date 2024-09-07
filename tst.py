@@ -1,33 +1,107 @@
-def Tx(nn):
-    box=[0]*len(nn)
+import requests
+import time
+import random
+import threading
+
+# Specify the video URL and the number of views you want to simulate
+url = "https://www.youtube.com/watch?v=pPjmA944Y88"
+num_views = 100
+
+# List of user agents to rotate through
+user_agents = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0",
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0"
+]
+
+# Function to send a single request
+def send_request():
+    headers = {
+        "User-Agent": random.choice(user_agents)
+    }
+    response = requests.get(url, headers=headers)
+    print("View sent...")
+
+# Function to send multiple requests
+def send_requests(num_views):
+    for i in range(num_views):
+        send_request()
+        time.sleep(random.uniform(0.5, 2))  # wait for a random time between 0.5 and 2 seconds
+
+# Create multiple threads to send requests concurrently
+threads = []
+for i in range(10):  # create 10 threads
+    thread = threading.Thread(target=send_requests, args=(num_views // 10,))
+    threads.append(thread)
+    thread.start()
+
+# Wait for all threads to finish
+for thread in threads:
+    thread.join()
+
+print("All views sent.")
+# def Tx(num, pv):
+#     les=[]
+#     eq=[]
+#     gr=[]
+
+#     length=len(num)
+
+#     for x in range(length):
+#         if pv> num[x]:
+#             les.append(num[x])
+#         elif pv==num[x]:
+#             eq.append(num[x])
+#         elif pv<num[x]:
+#             gr.append(num[x])
+    
+#     return les+eq+gr
+
+
+
+
+
+
+# nums = [9,12,5,10,14,3,10]
+# pivot = 10
+# print(Tx(nums, pivot))
+
+
+
+
+
+# def Tx(nn):
+#     box=[0]*len(nn)
   
             
 
-nums = [10,4,8,3]
+# nums = [10,4,8,3]
 
-print(Tx(nums))
-
-
-class Solution:
-    def longestNiceSubstring(self, s):
-        def is_nice(sub):
-            chr = set(sub)
-            return all(c.lower() in chr and c.upper() in chr for c in chr)
-
-        long = ""
-        n = len(s)
-
-        for i in range(n):
-            for j in range(i + 1, n + 1):
-                substring = s[i:j]
-                if is_nice(substring) and len(substring) > len(long):
-                    long = substring
-
-        return long
+# print(Tx(nums))
 
 
-rs = Solution()
-print(rs.longestNiceSubstring("YazaAay"))  
+# class Solution:
+#     def longestNiceSubstring(self, s):
+#         def is_nice(sub):
+#             chr = set(sub)
+#             return all(c.lower() in chr and c.upper() in chr for c in chr)
+
+#         long = ""
+#         n = len(s)
+
+#         for i in range(n):
+#             for j in range(i + 1, n + 1):
+#                 substring = s[i:j]
+#                 if is_nice(substring) and len(substring) > len(long):
+#                     long = substring
+
+#         return long
+
+
+# rs = Solution()
+# print(rs.longestNiceSubstring("YazaAay"))  
 
 
 
