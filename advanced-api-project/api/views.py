@@ -55,7 +55,7 @@ class BookListView(generics.ListAPIView):
     search_fields = ['title', 'author__name']
     ordering_fields = ['title', 'publication_year']
     ordering = ['title']  # Default ordering
-    
+    filters.SearchFilter
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -65,27 +65,28 @@ class BookListView(generics.ListAPIView):
     search_fields = ['title', 'author__name']  # Specify fields to search
     ordering_fields = ['title', 'publication_year']
     ordering = ['title']  # Default ordering
-
+    filters.SearchFilter
 # Retrieve details of a single book
 class BookDetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
+    filters.SearchFilter
 # Create a new book
 class BookCreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]  # Restrict to authenticated users
-
+    filters.SearchFilter
 # Update an existing book
 class BookUpdateView(generics.UpdateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]  # Restrict to authenticated users
-
+    filters.SearchFilter
 # Delete a book
 class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]  
+    filters.SearchFilter
