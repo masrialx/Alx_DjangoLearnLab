@@ -15,7 +15,7 @@ class BookTests(APITestCase):
         )
         self.book_url = reverse('book-list')  # URL for listing and creating books
         self.book_detail_url = reverse('book-detail', args=[self.book.id])  # URL for retrieving, updating, and deleting a book
-
+        self.client.login
     def test_create_book(self):
         # Test the creation of a new book
         data = {
@@ -27,14 +27,14 @@ class BookTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Book.objects.count(), 2)
         self.assertEqual(Book.objects.get(id=response.data['id']).title, 'New Book')
-
+        self.client.login
     def test_retrieve_book(self):
         # Test retrieving a single book's details
         response = self.client.get(self.book_detail_url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['title'], self.book.title)
         self.assertEqual(response.data['publication_year'], self.book.publication_year)
-
+        self.client.login
     def test_update_book(self):
         # Test updating an existing book
         data = {
@@ -45,7 +45,7 @@ class BookTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.book.refresh_from_db()
         self.assertEqual(self.book.title, 'Updated Book')
-
+        self.client.login
     def test_delete_book(self):
         # Test deleting a book
         response = self.client.delete(self.book_detail_url)
