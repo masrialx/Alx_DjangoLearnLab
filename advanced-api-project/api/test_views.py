@@ -51,7 +51,7 @@ class BookTests(APITestCase):
         response = self.client.delete(self.book_detail_url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Book.objects.count(), 0)
-
+       
     def test_filter_books(self):
         # Test filtering books by title
         response = self.client.get(self.book_url, {'title': 'Test Book'})

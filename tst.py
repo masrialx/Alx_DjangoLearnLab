@@ -1,47 +1,95 @@
-import requests
-import time
-import random
-import threading
+# Import necessary libraries
+# Import necessary libraries
 
-# Specify the video URL and the number of views you want to simulate
+# Set up the API credentials
+api_key = "AIzaSyCZ0rcWvDQAxtynB7DUb0z3KkylyiUF_PM"
+
+import pywhatkit
+
+# Set the video URL
 url = "https://www.youtube.com/watch?v=pPjmA944Y88"
-num_views = 100
 
-# List of user agents to rotate through
-user_agents = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0",
-    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0"
-]
+# Open the video in the default browser
+pywhatkit.playonyt(url)
 
-# Function to send a single request
-def send_request():
-    headers = {
-        "User-Agent": random.choice(user_agents)
-    }
-    response = requests.get(url, headers=headers)
-    print("View sent...")
+# Simulate a view by playing the video for a short duration
+import time
+time.sleep(10)
 
-# Function to send multiple requests
-def send_requests(num_views):
-    for i in range(num_views):
-        send_request()
-        time.sleep(random.uniform(0.5, 2))  # wait for a random time between 0.5 and 2 seconds
+# Close the browser
+import pyautogui
+pyautogui.hotkey('ctrl', 'w')
 
-# Create multiple threads to send requests concurrently
-threads = []
-for i in range(10):  # create 10 threads
-    thread = threading.Thread(target=send_requests, args=(num_views // 10,))
-    threads.append(thread)
-    thread.start()
 
-# Wait for all threads to finish
-for thread in threads:
-    thread.join()
+# from googleapiclient.discovery import build
 
-print("All views sent.")
+# api_key = "AIzaSy7DUb0z3KkylyiUF_PM"
+
+# # Create the API client
+# youtube = build("youtube", "v3", developerKey=api_key)
+
+# # Retrieve video information
+# video_id = "C-D6hv5D5rQ"
+# video_response = youtube.videos().list(part="statistics", id=video_id).execute()
+
+# # Print the view count, likes, and comments
+# print("View count:", video_response["items"][0]["statistics"]["viewCount"])
+# print("Likes:", video_response["items"][0]["statistics"]["likeCount"])
+# print("Comments:", video_response["items"][0]["statistics"]["commentCount"])
+
+
+
+
+# api="AIzaSyCZ0rcWvDQAxtynB7DUb0z3KkylyiUF_PM"
+
+
+
+# import requests
+# import time
+# import random
+# import threading
+
+# # Specify the video URL and the number of views you want to simulate
+# url = "https://www.youtube.com/watch?v=pPjmA944Y88"
+# num_views = 100
+
+# # List of user agents to rotate through
+# user_agents = [
+#     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+#     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+#     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0",
+#     "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
+#     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0"
+# ]
+
+# # Function to send a single request
+# def send_request():
+#     headers = {
+#         "User-Agent": random.choice(user_agents)
+#     }
+#     response = requests.get(url, headers=headers)
+#     print("View sent...")
+
+# # Function to send multiple requests
+# def send_requests(num_views):
+#     for i in range(num_views):
+#         send_request()
+#         time.sleep(random.uniform(0.5, 2))  # wait for a random time between 0.5 and 2 seconds
+
+# # Create multiple threads to send requests concurrently
+# threads = []
+# for i in range(10):  # create 10 threads
+#     thread = threading.Thread(target=send_requests, args=(num_views // 10,))
+#     threads.append(thread)
+#     thread.start()
+
+# # Wait for all threads to finish
+# for thread in threads:
+#     thread.join()
+
+# print("All views sent.")
+
+
 # def Tx(num, pv):
 #     les=[]
 #     eq=[]
