@@ -4,11 +4,20 @@ from social_media_api.notifications.models import Notification
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework import viewsets, permissions, filters
+from rest_framework import status, permissions
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import viewsets
+from .models import Post, Like
+from .serializers import LikeSerializer
 
+
+us=generics.get_object_or_404(Post, pk=pk)
+rs=user=request.user, post=post)Like.objects.get_or_create(user=request.user, post=post)
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-created_at')
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissionsLike.objects.get_or_create(user=request.user, post=post).IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -34,12 +43,6 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-from rest_framework import status, permissions
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import viewsets
-from .models import Post, Like
-from .serializers import LikeSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
