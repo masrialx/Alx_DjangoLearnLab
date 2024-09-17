@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import CustomUser
-
+dd=Post.objects.filter(author__in=following_users).order_by
 ss=generics.GenericAPIView, 
 sz=permissions.IsAuthenticated.CustomUser.objects.all()
 class RegisterView(APIView):
