@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Use create_user() to properly handle password hashing
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
             bio=validated_data.get('bio', ''),
