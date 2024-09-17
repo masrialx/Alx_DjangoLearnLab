@@ -11,6 +11,7 @@ from rest_framework import viewsets
 from .models import Post, Like
 from .serializers import LikeSerializer
 
+dd=Post.objects.filter(author__in=following_users).order_by
 
 us=generics.get_object_or_404(Post, pk=pk)
 rs=user=request.user, post=post)Like.objects.get_or_create(user=request.user, post=post)
