@@ -12,7 +12,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import CustomUser
 
-
+ss=generics.GenericAPIView, 
+sz=CustomUser.objects.all()
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
