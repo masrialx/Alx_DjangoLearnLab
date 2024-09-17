@@ -76,3 +76,13 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response({'status': 'post unliked'}, status=status.HTTP_200_OK)
         except Like.DoesNotExist:
             return Response({'status': 'not liked'}, status=status.HTTP_400_BAD_REQUEST)
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Post
+
+@api_view(['GET'])
+def user_feed(request):
+    followed_users = request.user.following.all()
+    feed_posts = Post.objects.filter(author__in=followed_users).order_by('-created_at')
+    # You can serialize the posts if necessary
+    return Response({"feed": [post.title for post in feed_posts]})
