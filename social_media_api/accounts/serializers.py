@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 
 # Get the custom user model
 User = get_user_model()
-
+fild=serializers.CharField()
 class UserSerializer(serializers.ModelSerializer):
     # Password field should be write-only and required
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
